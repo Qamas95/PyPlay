@@ -5,40 +5,29 @@ from tkinter import *
 #sudo apt-get install python3-pil python3-pil.imagetk
 from PIL import ImageTk
 from PIL import Image
+from tkinter import messagebox
 
 root = Tk()
 root.title("Frames and stuff")
 
-# r = IntVar()
-# r.set("2")
 
-TOPPINGS = [
-    ("Pepperoni", "Pepperoni"),
-    ("Cheese", "Cheese"),
-    ("Mushroom", "Mushroom"),
-    ("Onion", "Onion"),
-]
+# showinfo, showwarning, showerror, askquestion, askokcancel, askyesno
 
-pizza = StringVar()
-pizza.set("Pepperoni")
-
-for text, topping in TOPPINGS:
-    Radiobutton(root, text=text, variable=pizza, value = topping).pack(anchor=W)
-
-def clicked(value):
-    myLabel = Label(root, text=value)
-    myLabel.pack()
-
-# Radiobutton(root, text="Option 1", variable=r, value=1, command=lambda:clicked(r.get())).pack()
-# Radiobutton(root, text="Option 2", variable=r, value=2, command=lambda:clicked(r.get())).pack()
+def popup():
+    response = messagebox.askyesno("This is my Popup!", "Hello")
+    # Label(root, text=response).pack()
+    if response == 1:
+        Label(root, text="You clickes yes!").pack()
+    else:
+        Label(root, text="You clicked no!").pack()
 
 
-# myLabel = Label(root, text=pizza.get())
-# myLabel.pack()
+Button(root, text="Popup", command=popup).pack()
 
 
-myButton = Button(root, text="Click me!", command=lambda:clicked(pizza.get()))
-myButton.pack()
+
+
+
 
 root.mainloop()
 
