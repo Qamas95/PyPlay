@@ -9,14 +9,36 @@ from PIL import Image
 root = Tk()
 root.title("Frames and stuff")
 
-frame = LabelFrame(root, padx=50, pady=50)
-frame.pack(padx=10, pady=10)
+# r = IntVar()
+# r.set("2")
+
+TOPPINGS = [
+    ("Pepperoni", "Pepperoni"),
+    ("Cheese", "Cheese"),
+    ("Mushroom", "Mushroom"),
+    ("Onion", "Onion"),
+]
+
+pizza = StringVar()
+pizza.set("Pepperoni")
+
+for text, topping in TOPPINGS:
+    Radiobutton(root, text=text, variable=pizza, value = topping).pack(anchor=W)
+
+def clicked(value):
+    myLabel = Label(root, text=value)
+    myLabel.pack()
+
+# Radiobutton(root, text="Option 1", variable=r, value=1, command=lambda:clicked(r.get())).pack()
+# Radiobutton(root, text="Option 2", variable=r, value=2, command=lambda:clicked(r.get())).pack()
 
 
-b = Button(frame, text="Test button")
-b2 = Button(frame, text="Test2 button")
-b.grid(row=0, column=0)
-b2.grid(row=1, column=1)
+# myLabel = Label(root, text=pizza.get())
+# myLabel.pack()
+
+
+myButton = Button(root, text="Click me!", command=lambda:clicked(pizza.get()))
+myButton.pack()
 
 root.mainloop()
 
