@@ -1,5 +1,5 @@
 from tkinter import *
-
+from tkinter import filedialog
 #import this to use normal images after . like .png etc 
 #do: pip install Pillow
 #sudo apt-get install python3-pil python3-pil.imagetk
@@ -11,14 +11,13 @@ root.title('Name of app')
 
 
 
-def openWindow():
-    top = Toplevel()
-    lbl = Label(top, text="Hello").pack()
-    btn2 = Button(top, text="Close window", command = top.destroy)
-    btn2.pack()
 
-btn = Button(root, text="Open Second Window", command = openWindow)
-btn.pack()
+def open():
+    root.filename = filedialog.askopenfilename(initialdir="D:/Users/kk/Pulpit/Python/", title="Select A File", filetypes=(("txt files", "*.txt"),("all files", "*.*")))
+    mylabel = Label(root, text=root.filename)
+
+
+my_btn = Button(root, text="Open file", command=open).pack()
 
 root.mainloop()
 
