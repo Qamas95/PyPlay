@@ -10,20 +10,23 @@ root = Tk()
 root.title('Name of app')
 root.geometry("400x400")
 
-var = StringVar()
 
-c = Checkbutton(root, text="Check this box", variable = var, onvalue="On", offvalue="Off")
-c.deselect()
-c.pack()
-
-def checkcheck():
-    test_label = Label(root, text=var.get()).pack()
+def show():
+    myLabel = Label(root, text=clicked.get()).pack()
 
 
-btn1 = Button(root, text="Click me!", command=checkcheck).pack()
+options = [
+"Mon","Tues","Wed","Thurs","Frid"
+]
 
 
+clicked = StringVar()
+clicked.set(options[0])
+drop = OptionMenu(root, clicked, *options)
+drop.pack()
 
+
+myButton = Button(root, text="Show selection", command=show).pack()
 
 root.mainloop()
 
