@@ -1,5 +1,5 @@
 from tkinter import *
-
+from tkinter import filedialog
 #import this to use normal images after . like .png etc 
 #do: pip install Pillow
 #sudo apt-get install python3-pil python3-pil.imagetk
@@ -7,38 +7,31 @@ from PIL import ImageTk
 from PIL import Image
 
 root = Tk()
-root.title("Frames and stuff")
-
-# r = IntVar()
-# r.set("2")
-
-TOPPINGS = [
-    ("Pepperoni", "Pepperoni"),
-    ("Cheese", "Cheese"),
-    ("Mushroom", "Mushroom"),
-    ("Onion", "Onion"),
-]
-
-pizza = StringVar()
-pizza.set("Pepperoni")
-
-for text, topping in TOPPINGS:
-    Radiobutton(root, text=text, variable=pizza, value = topping).pack(anchor=W)
-
-def clicked(value):
-    myLabel = Label(root, text=value)
-    myLabel.pack()
-
-# Radiobutton(root, text="Option 1", variable=r, value=1, command=lambda:clicked(r.get())).pack()
-# Radiobutton(root, text="Option 2", variable=r, value=2, command=lambda:clicked(r.get())).pack()
+root.title('Name of app')
+root.geometry("400x400")
 
 
-# myLabel = Label(root, text=pizza.get())
-# myLabel.pack()
 
 
-myButton = Button(root, text="Click me!", command=lambda:clicked(pizza.get()))
-myButton.pack()
+
+vertical = Scale(root, from_=0, to=400)
+vertical.pack()
+
+horizontal = Scale(root, from_=0, to=400, orient = HORIZONTAL)
+horizontal.pack()
+
+my_label = Label(root, text=horizontal.get()).pack()
+
+
+def slide():
+    my_label = Label(root, text=horizontal.get()).pack()
+    root.geometry(str(horizontal.get()) + "x" + str(vertical.get()))
+
+my_btn = Button(root, text="Click me", command=slide).pack()
+
+
+
+
 
 root.mainloop()
 
