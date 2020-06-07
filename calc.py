@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import filedialog
+import sqlite3
 #import this to use normal images after . like .png etc 
 #do: pip install Pillow
 #sudo apt-get install python3-pil python3-pil.imagetk
@@ -11,22 +12,35 @@ root.title('Name of app')
 root.geometry("400x400")
 
 
-def show():
-    myLabel = Label(root, text=clicked.get()).pack()
+# create a database or connect to one
+
+conn = sqlite3.connect('characters_book.db')
 
 
-options = [
-"Mon","Tues","Wed","Thurs","Frid"
-]
+#create cursor
+
+c = conn.cursor()
 
 
-clicked = StringVar()
-clicked.set(options[0])
-drop = OptionMenu(root, clicked, *options)
-drop.pack()
+#create table
+
+c.execute("""CREATE TABLE addresses (
+		world text,
+		name text,
+		lvl integer,
+		email text,
+		password text
+		)""")
 
 
-myButton = Button(root, text="Show selection", command=show).pack()
+#commit changes
+conn.commit()
+
+
+#close connection
+
+conn.close()
+
 
 root.mainloop()
 
