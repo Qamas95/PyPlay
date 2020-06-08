@@ -29,6 +29,20 @@ c.execute("""CREATE TABLE addresses (
 '''
 
 
+# Create functioon to delete a record
+
+def delete():
+        conn = sqlite3.connect('characters_book.db')
+        c = conn.cursor()
+
+        #Delete a record
+        c.execute("DELETE from addresses WHERE oid = " + delete_box.get())
+
+
+
+        conn.commit()
+        conn.close()
+
 #Create submit function for database
 def submit():
         
@@ -78,7 +92,7 @@ def query():
                 print_records += str(record) +" " "\n"
                 
         query_label = Label(root, text=print_records)
-        query_label.grid(row = 4, column = 0, columnspan =2)
+        query_label.grid(row = 6, column = 0, columnspan =5)
 
         conn.commit()
         conn.close()
@@ -98,6 +112,8 @@ email.grid(row=1, column =3)
 
 password = Entry(root, width=30)
 password.grid(row=1, column =4)
+
+
 
 #Create text box labels
 
@@ -125,6 +141,21 @@ submit_btn.grid(row=2,column = 0, columnspan=5, pady=10, padx=10, ipadx=100)
 
 query_btn = Button(root, text="Show records", command=query)
 query_btn.grid(row=3,column = 0, columnspan=5, pady=10, padx=10, ipadx=100)
+
+
+#create delete button
+delete_btn = Button(root, text="Delete button", command=delete)
+delete_btn.grid(row=5,column = 0, columnspan=5, pady=10, padx=10, ipadx=100)
+
+
+delete_box = Entry(root, width=30)
+delete_box.grid(row=4, column=0, columnspan=5)
+
+delete_box_label = Label(root, text="ID number")
+delete_box_label.grid(row=4, column=1, columnspan=5)
+
+
+
 
 #commit changes
 conn.commit()
